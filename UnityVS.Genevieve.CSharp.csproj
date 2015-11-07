@@ -73,6 +73,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\CameraController.cs" />
     <Compile Include="Assets\Scripts\Genevieve.cs" />
+    <Compile Include="Assets\Scripts\HeartRateMonitor.cs" />
     <Compile Include="Assets\Scripts\Interactable.cs" />
     <Compile Include="Assets\Scripts\Main.cs" />
   </ItemGroup>

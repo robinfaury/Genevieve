@@ -13,7 +13,7 @@ public class Main : MonoBehaviour
             Debug.LogError("Camera not set in Main");
         else
         {
-            genevieve.Init();
+            genevieve.Init(cameraController);
             cameraController.Init(genevieve);
         }
     }
