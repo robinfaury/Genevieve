@@ -1,22 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Interactable : MonoBehaviour
+public abstract class Interactable : MonoBehaviour
 {
-    void Start() // Unity callback
+    public abstract void Init();
+    public abstract void Refresh();
+    public virtual void MouseOver(Genevieve genevieve)
     {
 
     }
-    public void Init() // Main callback
-    {
-
-    }
-
-    void Update() // Unity callback
-    {
-
-    }
-    public void Refresh() // Main callback
+    public virtual void Interact(Genevieve genevieve)
     {
 
     }
