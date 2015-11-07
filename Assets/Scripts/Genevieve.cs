@@ -7,6 +7,7 @@ public class Genevieve : MonoBehaviour
     private CharacterController characterController;
     private float speed = 5.0f;
     private float gravity = 15.0f;
+    private Interactable interactableHeld = null;
     public void Init(CameraController cameraController)
     {
         this.cameraController = cameraController;
