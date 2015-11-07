@@ -3,20 +3,48 @@ using System.Collections;
 
 public class Interactable : MonoBehaviour
 {
-    void Start() // Unity callback
+    private Material originMat;
+    void Start()
+    {
+        originMat = GetComponent<Renderer>().material;
+    }
+    public virtual void Init()
     {
 
     }
-    public void Init() // Main callback
+
+    public virtual bool IsCloseEnough(Genevieve genevieve)
+    {
+        return (genevieve.transform.position - transform.position).magnitude < 1.3f;
+    }
+    public virtual void MouseAimed(Genevieve genevieve)
+    {
+        if (IsCloseEnough(genevieve))
+            GetComponent<Renderer>().material = Main.staticOverMatCloseEnough;
+        else
+            GetComponent<Renderer>().material = Main.staticOverMat;
+    }
+    public virtual void MouseEnter(Genevieve genevieve)
     {
 
     }
-
-    void Update() // Unity callback
+    public virtual void MouseLeave(Genevieve genevieve)
     {
-
+        GetComponent<Renderer>().material = originMat;
     }
-    public void Refresh() // Main callback
+    public virtual void Take(Genevieve genevieve)
+    {
+        GetComponent<Renderer>().material = originMat;
+        GetComponent<Rigidbody>().detectCollisions = false;
+        GetComponent<Collider>().enabled = false;
+    }
+    public virtual void Throw(Genevieve genevieve)
+    {
+        GetComponent<Rigidbody>().detectCollisions = true;
+        GetComponent<Collider>().enabled = true;
+        transform.position = genevieve.transform.position + new Vector3(genevieve.cameraController.GetDirection().x, 2, genevieve.cameraController.GetDirection().y);
+    }
+    public virtual void Held(Genevieve genevieve)
     {
 
     }

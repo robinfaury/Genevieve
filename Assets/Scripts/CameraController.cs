@@ -4,37 +4,34 @@ using System.Collections;
 public class CameraController : MonoBehaviour
 {
     private Transform childCam;
+    private Transform cameraPivotPoint;
+    private Transform cameraAnchor;
     private Genevieve genevieve;
-    //private Vector3 genevieveToPivotPoint = new Vector3(0, );
+    private Vector3 genevieveToPivotPoint = new Vector3(0, 1, 0.7f);
     private float scrollSpeed = 1.0f;
     private float genevieveToCamDistance = 3.0f;
     Vector2 mouseAbsolute;
     Vector2 smoothMouse;
 
-    public Vector2 clampInDegrees = new Vector2(360, 180);
+    //public Vector2 clampInDegrees = new Vector2(360, 180);
+    public Vector2 angleRangeX = new Vector2(0, 0);
+    public Vector2 angleRangeY = new Vector2(-80, 70);
     public CursorLockMode lockCursor = CursorLockMode.Locked;
     public Vector2 sensitivity = new Vector2(2, 2);
     public Vector2 smoothing = new Vector2(3, 3);
-    public Vector2 targetDirection;
-    public Vector2 targetCharacterDirection;
 
-    // Assign this if there's a parent object controlling motion, such as a Character Controller.
-    // Yaw rotation will affect this object instead of the camera if set.
-    public GameObject characterBody;
     public void Init(Genevieve genevieve) // Main callback
     {
         this.genevieve = genevieve;
-        childCam = transform.GetChild(0);
-        // Set target direction to the camera's initial orientation.
-        targetDirection = transform.localRotation.eulerAngles;
-
-        // Set target direction for the character body to its inital state.
-        if (characterBody) targetCharacterDirection = characterBody.transform.localRotation.eulerAngles;
+        cameraPivotPoint = transform.GetChild(0);
+        cameraAnchor = cameraPivotPoint.GetChild(0);
+        childCam = cameraAnchor.GetChild(0);
     }
-    public void Refresh() // Main callback
+    public void UpdateCamera() // Main callback
     {
-        genevieveToCamDistance = Mathf.Clamp(genevieveToCamDistance - Input.GetAxis("Mouse ScrollWheel") * scrollSpeed, 2.0f, 20.0f);
+        genevieveToCamDistance = Mathf.Clamp(genevieveToCamDistance - Input.GetAxis("Mouse ScrollWheel") * scrollSpeed, 0.1f, 2.0f);
 
+            transform.position = genevieve.transform.position;
         /*Vector2 orientationChange = Vector2.zero;
         if (Input.mousePosition.x >= 0 && Input.mousePosition.x < Screen.width && Input.mousePosition.y >= 0 && Input.mousePosition.y < Screen.height && !Input.GetKey(KeyCode.Space))
         {
@@ -60,18 +57,9 @@ public class CameraController : MonoBehaviour
         }*/
         childCam.transform.localPosition = new Vector3(0, 0, -genevieveToCamDistance);
 
-        if (genevieve != null)
-        {
-            transform.position = genevieve.transform.position;
-            //transform.rotation = Quaternion.LookRotation(-genevieveToCamDirection);
-        }
         // Ensure the cursor is always locked when set
         Cursor.lockState = lockCursor;
-        Cursor.visible = false;
-
-        // Allow the script to clamp based on a desired target value.
-        Quaternion targetOrientation = Quaternion.Euler(targetDirection);
-        Quaternion targetCharacterOrientation = Quaternion.Euler(targetCharacterDirection);
+        //Cursor.visible = false;
 
         // Get raw mouse input for a cleaner reading on more sensitive mice.
         Vector2 mouseDelta = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
@@ -87,45 +75,43 @@ public class CameraController : MonoBehaviour
         mouseAbsolute += smoothMouse;
 
         // Clamp and apply the local x value first, so as not to be affected by world transforms.
-        if (clampInDegrees.x < 360)
-            mouseAbsolute.x = Mathf.Clamp(mouseAbsolute.x, -clampInDegrees.x * 0.5f, clampInDegrees.x * 0.5f);
-
-        Quaternion xRotation = Quaternion.AngleAxis(-mouseAbsolute.y, targetOrientation * Vector3.right);
-        transform.localRotation = xRotation;
-
+        if (angleRangeX.x < angleRangeX.y)
+            mouseAbsolute.x = Mathf.Clamp(mouseAbsolute.x, angleRangeX.x, angleRangeX.y);
         // Then clamp and apply the global y value.
-        if (clampInDegrees.y < 360)
-            mouseAbsolute.y = Mathf.Clamp(mouseAbsolute.y, -clampInDegrees.y * 0.5f, clampInDegrees.y * 0.5f);
+        if (angleRangeY.x < angleRangeY.y)
+            mouseAbsolute.y = Mathf.Clamp(mouseAbsolute.y, angleRangeY.x, angleRangeY.y);
 
-        transform.localRotation *= targetOrientation;
-
-        // If there's a character body that acts as a parent to the camera
-        if (characterBody)
-        {
-            Quaternion yRotation = Quaternion.AngleAxis(mouseAbsolute.x, characterBody.transform.up);
-            characterBody.transform.localRotation = yRotation;
-            characterBody.transform.localRotation *= targetCharacterOrientation;
-        }
-        else
-        {
-            Quaternion yRotation = Quaternion.AngleAxis(mouseAbsolute.x, transform.InverseTransformDirection(Vector3.up));
-            transform.localRotation *= yRotation;
-        }
+        transform.localRotation = Quaternion.AngleAxis(mouseAbsolute.x, Vector3.up);
+        cameraPivotPoint.localRotation = Quaternion.AngleAxis(-mouseAbsolute.y, Vector3.right);
+        
     }
 
 
     public Vector2 GetDirection()
     {
-        Vector2 r = new Vector2(genevieve.transform.position.x - childCam.transform.position.x, genevieve.transform.position.z - childCam.transform.position.z);
-        if (r.sqrMagnitude < 0.01f)
+        Vector2 r = new Vector2(cameraAnchor.transform.position.x - childCam.transform.position.x, cameraAnchor.transform.position.z - childCam.transform.position.z);
+        if (r.sqrMagnitude < 0.001f)
             return new Vector2(0, 1);
         return r.normalized;
     }
     public Vector2 GetOrthoDirection()
     {
-        Vector2 r = new Vector2(genevieve.transform.position.z - childCam.transform.position.z, childCam.transform.position.x - genevieve.transform.position.x);
-        if (r.sqrMagnitude < 0.01f)
+        Vector2 r = new Vector2(cameraAnchor.transform.position.z - childCam.transform.position.z, childCam.transform.position.x - cameraAnchor.transform.position.x);
+        if (r.sqrMagnitude < 0.001f)
             return new Vector2(1, 0);
         return r.normalized;
+    }
+
+    public Interactable GetInteractable(out Vector3 point)
+    {
+        Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width * 0.5f, Screen.height * 0.5f, 0));
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit))
+        {
+            point = hit.point;
+            return hit.transform.gameObject.GetComponent<Interactable>();
+        }
+        point = Vector3.zero;
+        return null;
     }
 }
