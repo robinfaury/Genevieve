@@ -4,14 +4,18 @@ using System.Collections;
 public class CameraController : MonoBehaviour
 {
     private Transform childCam;
+    private Transform cameraPivotPoint;
+    private Transform cameraAnchor;
     private Genevieve genevieve;
-    private Vector3 genevieveToPivotPoint = new Vector3(0, 2, 0.7f);
+    private Vector3 genevieveToPivotPoint = new Vector3(0, 1, 0.7f);
     private float scrollSpeed = 1.0f;
     private float genevieveToCamDistance = 3.0f;
     Vector2 mouseAbsolute;
     Vector2 smoothMouse;
 
-    public Vector2 clampInDegrees = new Vector2(360, 180);
+    //public Vector2 clampInDegrees = new Vector2(360, 180);
+    public Vector2 angleRangeX = new Vector2(0, 0);
+    public Vector2 angleRangeY = new Vector2(-80, 70);
     public CursorLockMode lockCursor = CursorLockMode.Locked;
     public Vector2 sensitivity = new Vector2(2, 2);
     public Vector2 smoothing = new Vector2(3, 3);
@@ -19,12 +23,15 @@ public class CameraController : MonoBehaviour
     public void Init(Genevieve genevieve) // Main callback
     {
         this.genevieve = genevieve;
-        childCam = transform.GetChild(0);
+        cameraPivotPoint = transform.GetChild(0);
+        cameraAnchor = cameraPivotPoint.GetChild(0);
+        childCam = cameraAnchor.GetChild(0);
     }
-    public void Refresh() // Main callback
+    public void UpdateCamera() // Main callback
     {
-        genevieveToCamDistance = Mathf.Clamp(genevieveToCamDistance - Input.GetAxis("Mouse ScrollWheel") * scrollSpeed, 2.0f, 20.0f);
+        genevieveToCamDistance = Mathf.Clamp(genevieveToCamDistance - Input.GetAxis("Mouse ScrollWheel") * scrollSpeed, 0.1f, 2.0f);
 
+            transform.position = genevieve.transform.position;
         /*Vector2 orientationChange = Vector2.zero;
         if (Input.mousePosition.x >= 0 && Input.mousePosition.x < Screen.width && Input.mousePosition.y >= 0 && Input.mousePosition.y < Screen.height && !Input.GetKey(KeyCode.Space))
         {
@@ -68,49 +75,43 @@ public class CameraController : MonoBehaviour
         mouseAbsolute += smoothMouse;
 
         // Clamp and apply the local x value first, so as not to be affected by world transforms.
-        if (clampInDegrees.x < 360)
-            mouseAbsolute.x = Mathf.Clamp(mouseAbsolute.x, -clampInDegrees.x * 0.5f, clampInDegrees.x * 0.5f);
+        if (angleRangeX.x < angleRangeX.y)
+            mouseAbsolute.x = Mathf.Clamp(mouseAbsolute.x, angleRangeX.x, angleRangeX.y);
         // Then clamp and apply the global y value.
-        if (clampInDegrees.y < 360)
-            mouseAbsolute.y = Mathf.Clamp(mouseAbsolute.y, -clampInDegrees.y * 0.5f, clampInDegrees.y * 0.5f);
+        if (angleRangeY.x < angleRangeY.y)
+            mouseAbsolute.y = Mathf.Clamp(mouseAbsolute.y, angleRangeY.x, angleRangeY.y);
 
-        Quaternion xRotation = Quaternion.AngleAxis(-mouseAbsolute.y, Vector3.right);
-        transform.localRotation = xRotation;
-
-
-        Quaternion yRotation = Quaternion.AngleAxis(mouseAbsolute.x, transform.InverseTransformDirection(Vector3.up));
-        transform.localRotation *= yRotation;
-
+        transform.localRotation = Quaternion.AngleAxis(mouseAbsolute.x, Vector3.up);
+        cameraPivotPoint.localRotation = Quaternion.AngleAxis(-mouseAbsolute.y, Vector3.right);
         
-        if (genevieve != null)
-        {
-            Vector2 direction = GetDirection();
-            transform.position = genevieve.transform.position + Quaternion.AngleAxis(-Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + 90.0f, Vector3.up) * genevieveToPivotPoint;
-        }
     }
 
 
     public Vector2 GetDirection()
     {
-        Vector2 r = new Vector2(transform.position.x - childCam.transform.position.x, transform.position.z - childCam.transform.position.z);
-        if (r.sqrMagnitude < 0.01f)
+        Vector2 r = new Vector2(cameraAnchor.transform.position.x - childCam.transform.position.x, cameraAnchor.transform.position.z - childCam.transform.position.z);
+        if (r.sqrMagnitude < 0.001f)
             return new Vector2(0, 1);
         return r.normalized;
     }
     public Vector2 GetOrthoDirection()
     {
-        Vector2 r = new Vector2(transform.position.z - childCam.transform.position.z, childCam.transform.position.x - transform.position.x);
-        if (r.sqrMagnitude < 0.01f)
+        Vector2 r = new Vector2(cameraAnchor.transform.position.z - childCam.transform.position.z, childCam.transform.position.x - cameraAnchor.transform.position.x);
+        if (r.sqrMagnitude < 0.001f)
             return new Vector2(1, 0);
         return r.normalized;
     }
 
-    public Interactable GetInteractable()
+    public Interactable GetInteractable(out Vector3 point)
     {
         Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width * 0.5f, Screen.height * 0.5f, 0));
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit))
+        {
+            point = hit.point;
             return hit.transform.gameObject.GetComponent<Interactable>();
+        }
+        point = Vector3.zero;
         return null;
     }
 }
