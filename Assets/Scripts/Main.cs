@@ -12,6 +12,7 @@ public class Main : MonoBehaviour
     public GameObject map;
     public GameObject mapPrefab;
     public UIManager uiManager;
+    public HeartRateMonitor heartRateMonitor;
     [HideInInspector]
     public InterLevelPanel interLevelPanel;
     [HideInInspector]
@@ -70,6 +71,9 @@ public class Main : MonoBehaviour
             Time.timeScale = 1;
         }
         gameManager.Update(this);
+
+        //if (Input.GetKeyDown(KeyCode.G))
+            //gameManager.level = 5;
 
         if (gameManager.level != 4)
             porteLargeRigidBody.constraints = RigidbodyConstraints.FreezeAll;

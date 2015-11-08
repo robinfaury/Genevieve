@@ -15,12 +15,14 @@ public class Shake : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (audio.volume < 0.8f)
-            return;
-        Debug.LogError("caaca");
         float[] spectrum = audio.GetSpectrumData(1024, 0, FFTWindow.BlackmanHarris);
         if (spectrum[10] > 0.01)
-            this.transform.position = new Vector3(spectrum[10] * 5, spectrum[10] * 50, spectrum[10] * 5) * factor;
+        {
+            if (audio.volume < 0.5f)
+                this.transform.position = new Vector3(spectrum[10] * 5, spectrum[10] * 50, spectrum[10] * 5) * audio.volume / 2.0f;
+            if (audio.volume > 0.5f)
+                this.transform.position = new Vector3(spectrum[10] * 5, spectrum[10] * 50, spectrum[10] * 5) * audio.volume / 4.0f;
+        }
         //Debug.Log(spectrum[100]);
     }
 }
