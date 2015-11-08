@@ -20,6 +20,7 @@ public class Main : MonoBehaviour
     public AudioSource salle = null;
     [HideInInspector]
     public AudioSource mamySource = null;
+    private Rigidbody porteLargeRigidBody = null;
     public AudioClip[] audioClips;
     public CameraController cameraController;
     [HideInInspector]
@@ -63,6 +64,10 @@ public class Main : MonoBehaviour
             Time.timeScale = 1;
         }
         gameManager.Update(this);
+        if (gameManager.level != 5)
+            porteLargeRigidBody.constraints = RigidbodyConstraints.FreezeAll;
+        else
+            porteLargeRigidBody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
         gameManager.running = !gameManager.pauseGame && !pauseMenu;
         cursorGameObject.SetActive(gameManager.running);
         if (genevieve != null)
@@ -91,6 +96,7 @@ public class Main : MonoBehaviour
         genevieve = map.transform.Find("Genevieve").GetComponent<Genevieve>();
         salle = map.transform.Find("salle").GetComponent<AudioSource>();
         mamySource = map.transform.Find("mamySource").GetComponent<AudioSource>();
+        porteLargeRigidBody = map.transform.Find("porte_large").GetComponent<Rigidbody>();
         genevieve.Init(cameraController);
         genevieve.gameManager = gameManager;
         cameraController.Init(genevieve);
