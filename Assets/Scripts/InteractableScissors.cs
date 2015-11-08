@@ -20,7 +20,6 @@ public class InteractableScissors : Interactable
             genevieve.animToPlay = 9;
             if ((new Vector2(transform.position.x, transform.position.z) - new Vector2(2.7f, 5.2f)).magnitude < 1.0f)
             {
-                Debug.LogWarning((new Vector2(transform.position.x, transform.position.z) - new Vector2(2.7f, 5.2f)).magnitude);
                 genevieve.gameManager.IncreaseCurrentLevelProgress(2);
             }
         }

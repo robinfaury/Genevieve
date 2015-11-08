@@ -18,8 +18,9 @@ public class InteractableSonnette : Interactable
         if (genevieve.gameManager.running && Input.GetMouseButton(1) && !genevieve.moving)
         {
             genevieve.animToPlay = 9;
-            if ((new Vector2(transform.position.x, transform.position.z) - new Vector2(transform.position.x, transform.position.z)).magnitude < 0.1f)
+            if ((new Vector2(transform.position.x, transform.position.z) - new Vector2(-40.7f, 1.0f)).magnitude < 1.0f)
             {
+                Debug.LogWarning((new Vector2(transform.position.x, transform.position.z) - new Vector2(2.7f, 5.2f)).magnitude);
                 genevieve.gameManager.IncreaseCurrentLevelProgress(4);
             }
         }

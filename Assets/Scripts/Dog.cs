@@ -10,7 +10,7 @@ public class Dog : MonoBehaviour
     }
     void Update()
     {
-        transform.rotation *= Quaternion.AngleAxis(rotatingSpeed * Time.deltaTime, Vector3.up);
+        transform.rotation *= Quaternion.AngleAxis(-rotatingSpeed/20.0f * Time.deltaTime, Vector3.forward);
     }
     public void Rotate()
     {
