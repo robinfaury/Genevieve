@@ -53,7 +53,6 @@
      <Compile Include="Assets\Scripts\InterLevelPanel.cs" />
      <Compile Include="Assets\Scripts\Interactable.cs" />
      <Compile Include="Assets\Scripts\InteractableBroom.cs" />
-     <Compile Include="Assets\Scripts\InteractableTel.cs" />
      <Compile Include="Assets\Scripts\InteractableTromblon.cs" />
      <Compile Include="Assets\Scripts\InteractableTrotter.cs" />
      <Compile Include="Assets\Scripts\Main.cs" />
