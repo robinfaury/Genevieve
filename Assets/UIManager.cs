@@ -34,7 +34,7 @@ public class UIManager : MonoBehaviour {
         playButton.GetComponentInChildren<Text>().color = colorClicked;
         playButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 60);
 
-        StartCoroutine(WaitForPlay());
+        //StartCoroutine(WaitForPlay());
         
         //
     }
@@ -62,7 +62,7 @@ public class UIManager : MonoBehaviour {
         quitButton.GetComponentInChildren<Text>().color = colorClicked;
         quitButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -15);
 
-        StartCoroutine(WaitForQuit());
+        //StartCoroutine(WaitForQuit());
     }
 
     private void OnEnterPlayButton()

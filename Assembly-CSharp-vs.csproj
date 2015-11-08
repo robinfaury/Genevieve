@@ -57,6 +57,7 @@
      <Compile Include="Assets\Scripts\Main.cs" />
      <Compile Include="Assets\Scripts\MicroMove.cs" />
      <Compile Include="Assets\Scripts\Shake.cs" />
+     <Compile Include="Assets\UIManager.cs" />
      <None Include="Assets\HighlightShader.shader" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>

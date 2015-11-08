@@ -17,8 +17,7 @@ public class Main : MonoBehaviour
     public CameraController cameraController;
     [HideInInspector]
     public GameManager gameManager;
-    [HideInInspector]
-    public bool pauseMenu = false;
+    private bool pauseMenu = false;
     void Start()
     {
         staticOverMat = overMat;
@@ -33,13 +32,13 @@ public class Main : MonoBehaviour
 
     void Update()
     {
-        gameManager.Update(this);
         if(Input.GetKeyDown(KeyCode.Escape))
             pauseMenu = !pauseMenu;
         if (pauseMenu)
             Time.timeScale = 0;
         else
             Time.timeScale = 1;
+        gameManager.Update(this);
         gameManager.running = !gameManager.pauseGame && !pauseMenu;
         cursorGameObject.SetActive(gameManager.running);
         if (genevieve2 != null)
