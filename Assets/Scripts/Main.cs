@@ -11,13 +11,14 @@ public class Main : MonoBehaviour
     public GameObject cursorGameObject;
     public GameObject map;
     public GameObject mapPrefab;
+    public UIManager uiManager;
     [HideInInspector]
     public InterLevelPanel interLevelPanel;
     private Genevieve genevieve2 = null;
     public CameraController cameraController;
     [HideInInspector]
     public GameManager gameManager;
-    private bool pauseMenu = false;
+    private bool pauseMenu = true;
     void Start()
     {
         staticOverMat = overMat;
@@ -32,8 +33,18 @@ public class Main : MonoBehaviour
 
     void Update()
     {
+
         if(Input.GetKeyDown(KeyCode.Escape))
+        {
             pauseMenu = !pauseMenu;
+            if (pauseMenu)
+                uiManager.Show();
+            else
+                uiManager.Hide();
+        }
+        if (uiManager.playClicked)
+            pauseMenu = false;
+        uiManager.playClicked = false;
         if (pauseMenu)
             Time.timeScale = 0;
         else
@@ -92,6 +103,30 @@ public class Timer
     public void Set(float newT)
     {
         t = Time.time - newT;
+    }
+    public void Substract(float sec)
+    {
+        t += sec;
+    }
+}
+public class UnscaledTimer
+{
+    private float t = Time.unscaledTime;
+    public UnscaledTimer()
+    {
+        t = Time.unscaledTime;
+    }
+    public void Reset()
+    {
+        t = Time.unscaledTime;
+    }
+    public float Get()
+    {
+        return Time.unscaledTime - t;
+    }
+    public void Set(float newT)
+    {
+        t = Time.unscaledTime - newT;
     }
     public void Substract(float sec)
     {
