@@ -13,6 +13,8 @@ public class Genevieve : MonoBehaviour
     public float speed = 2.0f;
     [HideInInspector]
     public bool moving = false;
+    [HideInInspector]
+    public bool sat = true;
     private float gravity = 5.0f;
     private Vector2 facingDirection = new Vector2(0, 1);
     private Vector2 wantedFacingDirection = new Vector2(0, 1);
@@ -112,6 +114,8 @@ public class Genevieve : MonoBehaviour
     }
     public void UpdateAnims()
     {
+        if (sat)
+            animToPlay = 2;
         if (animToPlay != lastAnim)
             animator.CrossFade(anims[animToPlay], 0.2f, 0, 0f);
         lastAnim = animToPlay;

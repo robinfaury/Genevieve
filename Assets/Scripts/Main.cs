@@ -14,7 +14,13 @@ public class Main : MonoBehaviour
     public UIManager uiManager;
     [HideInInspector]
     public InterLevelPanel interLevelPanel;
-    private Genevieve genevieve2 = null;
+    [HideInInspector]
+    public Genevieve genevieve = null;
+    [HideInInspector]
+    public AudioSource salle = null;
+    [HideInInspector]
+    public AudioSource mamySource = null;
+    public AudioClip[] audioClips;
     public CameraController cameraController;
     [HideInInspector]
     public GameManager gameManager;
@@ -52,12 +58,12 @@ public class Main : MonoBehaviour
         gameManager.Update(this);
         gameManager.running = !gameManager.pauseGame && !pauseMenu;
         cursorGameObject.SetActive(gameManager.running);
-        if (genevieve2 != null)
+        if (genevieve != null)
         {
-            genevieve2.UpdatePosition();
+            genevieve.UpdatePosition();
             cameraController.UpdateCamera();
-            genevieve2.UpdateAfterCamera();
-            genevieve2.UpdateAnims();
+            genevieve.UpdateAfterCamera();
+            genevieve.UpdateAnims();
         }
         interLevelPanel.Update();
     }
@@ -75,10 +81,12 @@ public class Main : MonoBehaviour
         }
         else
             map = GameObject.Instantiate(mapPrefab);
-        genevieve2 = map.transform.Find("Genevieve").GetComponent<Genevieve>();
-        genevieve2.Init(cameraController);
-        genevieve2.gameManager = gameManager;
-        cameraController.Init(genevieve2);
+        genevieve = map.transform.Find("Genevieve").GetComponent<Genevieve>();
+        salle = map.transform.Find("salle").GetComponent<AudioSource>();
+        mamySource = map.transform.Find("mamySource").GetComponent<AudioSource>();
+        genevieve.Init(cameraController);
+        genevieve.gameManager = gameManager;
+        cameraController.Init(genevieve);
         cameraController.gameManager = gameManager;
     }
 }
