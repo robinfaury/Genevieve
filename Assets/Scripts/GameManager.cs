@@ -39,11 +39,14 @@ public class GameManager
             main.genevieve.animToPlay = 8;
             timer.Reset();
             levelState = 0;
+
+            level = -2;
         }
         if (level == -2)
         {
             if (levelState == 0)
             {
+                main.heartRateMonitor.Dead();
                 if (timer.Get() > 3.0f)
                 {
                     pauseGame = true;
@@ -79,6 +82,7 @@ public class GameManager
     private float[] progressNeeded = new float[] { 20, 20, 1, 5, 1, 1 };
     private void UpdateLevel(Main main)
     {
+        main.heartRateMonitor.Slow();
         if (levelState == 0)
         {
             timer.Reset();
@@ -118,7 +122,7 @@ public class GameManager
             if (timer.Get() >= durationBeforeDeath[level] - durationBeforeRunning[level])
             {
                 levelState = 10;
-                level = -2;
+                level = -3;
                 timer.Reset();
             }
             else
@@ -127,6 +131,8 @@ public class GameManager
                 {
                     Debug.Log("DROP");
                     main.salle.volume = 1.0f;
+                    main.heartRateMonitor.Fast();
+
                 }
                 else
                     Debug.Log(timer.Get() + ", " + (durationBeforeDrop[level] - durationBeforeRunning[level]));

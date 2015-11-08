@@ -12,6 +12,7 @@ public class Main : MonoBehaviour
     public GameObject map;
     public GameObject mapPrefab;
     public UIManager uiManager;
+    public HeartRateMonitor heartRateMonitor;
     [HideInInspector]
     public InterLevelPanel interLevelPanel;
     [HideInInspector]

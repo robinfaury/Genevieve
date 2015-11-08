@@ -38,6 +38,7 @@ public class HeartRateMonitor : MonoBehaviour
         texture.Apply();
         image.sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0, 0));
 
+        Slow();
     }
 
     // Update is called once per frame
@@ -90,6 +91,26 @@ public class HeartRateMonitor : MonoBehaviour
         cptFrequencyDisplay += Time.deltaTime;
         texture.Apply();
         image.sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0, 0));
+    }
+
+    public void Fast()
+    {
+        frequency = 0.5f;
+        color = Color.red;
+        maxDisplay = 0;
+    }
+
+    public void Slow()
+    {
+        frequency = 1.5f;
+        color = new Color(1.0f, 0.8f, 0.8f, 1);
+        maxDisplay = 0.05f;
+    }
+
+    public void Dead()
+    {
+        frequency = 0.0f;
+        color = new Color(0.3f, 0, 0, 1);
     }
 
 }
