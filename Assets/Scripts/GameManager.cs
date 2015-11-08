@@ -4,8 +4,8 @@ using System.Collections;
 public class GameManager
 {
     public int level = -1;
-    private int levelState = 0;
-    private int levelProgress = 0;
+    public int levelState = 0;
+    public int levelProgress = 0;
     public bool running = true;
     public bool pauseGame = true;
     public Timer timer;
@@ -33,6 +33,29 @@ public class GameManager
     }
     public void Update(Main main)
     {
+        if (level == -3)
+        {
+            pauseGame = true;
+            main.genevieve.animToPlay = 8;
+            timer.Reset();
+            levelState = 0;
+
+            level = -2;
+        }
+        if (level == -2)
+        {
+            if (levelState == 0)
+            {
+                main.heartRateMonitor.Dead();
+                if (timer.Get() > 3.0f)
+                {
+                    pauseGame = true;
+                    main.interLevelPanel.FadeIn("You died", 1);
+                    main.genevieve.animToPlay = 8;
+                    levelState += 1;
+                }
+            }
+        }
         if (level == -1)
         {
             pauseGame = true;
@@ -56,8 +79,10 @@ public class GameManager
     private float[] durationBeforeDeath = new float[] { 100.0f, 80.0f, 70.0f, 40.0f, 30.0f, 35.0f };
     private float[] durationBeforeEnd = new float[] { 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f };
     private float[] durationInterLevel = new float[] { 2.0f, 2.0f, 2.0f, 2.0f, 2.0f, 2.0f };
+    private float[] progressNeeded = new float[] { 20, 20, 1, 5, 1, 1 };
     private void UpdateLevel(Main main)
     {
+        main.heartRateMonitor.Slow();
         if (levelState == 0)
         {
             timer.Reset();
@@ -97,7 +122,7 @@ public class GameManager
             if (timer.Get() >= durationBeforeDeath[level] - durationBeforeRunning[level])
             {
                 levelState = 10;
-                level = -2;
+                level = -3;
                 timer.Reset();
             }
             else
@@ -106,10 +131,12 @@ public class GameManager
                 {
                     Debug.Log("DROP");
                     main.salle.volume = 1.0f;
+                    main.heartRateMonitor.Fast();
+
                 }
                 else
                     Debug.Log(timer.Get() + ", " + (durationBeforeDrop[level] - durationBeforeRunning[level]));
-                if (levelProgress > 20)
+                if (levelProgress > progressNeeded[level])
                 {
                     timer.Reset();
                     pauseGame = true;

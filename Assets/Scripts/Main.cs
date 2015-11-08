@@ -12,6 +12,7 @@ public class Main : MonoBehaviour
     public GameObject map;
     public GameObject mapPrefab;
     public UIManager uiManager;
+    public HeartRateMonitor heartRateMonitor;
     [HideInInspector]
     public InterLevelPanel interLevelPanel;
     [HideInInspector]
@@ -21,6 +22,7 @@ public class Main : MonoBehaviour
     [HideInInspector]
     public AudioSource mamySource = null;
     private Rigidbody porteLargeRigidBody = null;
+    private Dog dog = null;
     public AudioClip[] audioClips;
     public CameraController cameraController;
     [HideInInspector]
@@ -64,10 +66,15 @@ public class Main : MonoBehaviour
             Time.timeScale = 1;
         }
         gameManager.Update(this);
-        if (gameManager.level != 5)
+
+        if (gameManager.level != 4)
             porteLargeRigidBody.constraints = RigidbodyConstraints.FreezeAll;
         else
             porteLargeRigidBody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+
+        if (gameManager.levelState >= 2)
+            dog.Rotate();
+
         gameManager.running = !gameManager.pauseGame && !pauseMenu;
         cursorGameObject.SetActive(gameManager.running);
         if (genevieve != null)
@@ -97,6 +104,7 @@ public class Main : MonoBehaviour
         salle = map.transform.Find("salle").GetComponent<AudioSource>();
         mamySource = map.transform.Find("mamySource").GetComponent<AudioSource>();
         porteLargeRigidBody = map.transform.Find("porte_large").GetComponent<Rigidbody>();
+        dog = map.transform.Find("dog").GetComponent<Dog>();
         genevieve.Init(cameraController);
         genevieve.gameManager = gameManager;
         cameraController.Init(genevieve);
