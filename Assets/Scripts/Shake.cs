@@ -18,6 +18,6 @@ public class Shake : MonoBehaviour
         float[] spectrum = audio.GetSpectrumData(1024, 0, FFTWindow.BlackmanHarris);
         if (spectrum[10] > 0.01)
             this.transform.position = new Vector3(spectrum[10] * 5, spectrum[10] * 50, spectrum[10] * 5) * factor;
-        Debug.Log(spectrum[100]);
+        ////Debug.Log(spectrum[100]);
     }
 }
