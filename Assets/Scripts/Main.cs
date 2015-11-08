@@ -67,6 +67,9 @@ public class Main : MonoBehaviour
         }
         gameManager.Update(this);
 
+        //if (Input.GetKeyDown(KeyCode.G))
+            //gameManager.level = 5;
+
         if (gameManager.level != 4)
             porteLargeRigidBody.constraints = RigidbodyConstraints.FreezeAll;
         else

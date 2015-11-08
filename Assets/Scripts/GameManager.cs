@@ -136,7 +136,7 @@ public class GameManager
                 }
                 else
                     Debug.Log(timer.Get() + ", " + (durationBeforeDrop[level] - durationBeforeRunning[level]));
-                if (levelProgress > progressNeeded[level])
+                if (levelProgress >= progressNeeded[level])
                 {
                     timer.Reset();
                     pauseGame = true;
@@ -152,7 +152,13 @@ public class GameManager
             {
                 timer.Reset();
                 pauseGame = true;
-                main.interLevelPanel.FadeIn("Part " + (level + 2), 1);
+                if (level + 2 < 7)
+                    main.interLevelPanel.FadeIn("Part " + (level + 2), 1);
+                else
+                {
+                    GameObject.Find("FinalExplosion").transform.Find("FinalExplosionChild").gameObject.SetActive(true);
+                    GameObject.Find("FinalExplosion").transform.Find("FinalExplosionChild").GetComponent<ParticleSystem>().Play();
+                }
                 levelState += 1;
             }
         }

@@ -54,6 +54,7 @@
      <Compile Include="Assets\Scripts\InterLevelPanel.cs" />
      <Compile Include="Assets\Scripts\Interactable.cs" />
      <Compile Include="Assets\Scripts\InteractableBroom.cs" />
+     <Compile Include="Assets\Scripts\InteractableCocotte.cs" />
      <Compile Include="Assets\Scripts\InteractableScissors.cs" />
      <Compile Include="Assets\Scripts\InteractableSonnette.cs" />
      <Compile Include="Assets\Scripts\InteractableTel.cs" />
