@@ -29,6 +29,7 @@ public class Genevieve : MonoBehaviour
     public Transform leftHand;
     [HideInInspector]
     public Transform rightHand;
+    private Timer grabTimer = null;
     public void Init(CameraController cameraController)
     {
         this.cameraController = cameraController;
@@ -107,6 +108,8 @@ public class Genevieve : MonoBehaviour
                 {
                     interactableHeld = interactable;
                     interactableHeld.Take(this);
+                    grabTimer = new Timer();
+                    grabTimer.Reset();
                 }
             }
             interactableAimed = interactable;
@@ -116,6 +119,13 @@ public class Genevieve : MonoBehaviour
     {
         if (sat)
             animToPlay = 2;
+        else if (grabTimer != null)
+        {
+            if (grabTimer.Get() < 0.5f)
+                animToPlay = 9;
+            else
+                grabTimer = null;
+        }
         if (animToPlay != lastAnim)
             animator.CrossFade(anims[animToPlay], 0.2f, 0, 0f);
         lastAnim = animToPlay;

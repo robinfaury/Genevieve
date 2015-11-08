@@ -51,9 +51,17 @@ public class Main : MonoBehaviour
             pauseMenu = false;
         uiManager.playClicked = false;
         if (pauseMenu)
+        {
+            salle.Pause();
+            mamySource.Pause();
             Time.timeScale = 0;
+        }
         else
+        {
+            salle.UnPause();
+            mamySource.UnPause();
             Time.timeScale = 1;
+        }
         gameManager.Update(this);
         gameManager.running = !gameManager.pauseGame && !pauseMenu;
         cursorGameObject.SetActive(gameManager.running);
