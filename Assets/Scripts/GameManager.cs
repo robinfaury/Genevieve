@@ -53,6 +53,7 @@ public class GameManager
     private float[] durationBeforeSalleSound = new float[] { 5.0f, 5.0f, 5.0f, 5.0f, 5.0f, 5.0f };
     private float[] durationBeforeRunning = new float[] { 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f };
     private float[] durationBeforeDrop = new float[] { 88.0f, 61.0f, 46.0f, 18.0f, 15.0f, 23.0f };
+    private float[] durationBeforeDeath = new float[] { 100.0f, 80.0f, 70.0f, 40.0f, 30.0f, 35.0f };
     private float[] durationBeforeEnd = new float[] { 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f };
     private float[] durationInterLevel = new float[] { 2.0f, 2.0f, 2.0f, 2.0f, 2.0f, 2.0f };
     private void UpdateLevel(Main main)
@@ -93,20 +94,29 @@ public class GameManager
         }
         if (levelState == 3)
         {
-            if (timer.Get() >= durationBeforeDrop[level] - durationBeforeRunning[level])
+            if (timer.Get() >= durationBeforeDeath[level] - durationBeforeRunning[level])
             {
-                Debug.Log("DROP");
-                main.salle.volume = 1.0f;
+                levelState = 10;
+                level = -2;
+                timer.Reset();
             }
             else
-                Debug.Log(timer.Get() + ", " + (durationBeforeDrop[level] - durationBeforeRunning[level]));
-            if (levelProgress > 20)
             {
-                timer.Reset();
-                pauseGame = true;
-                levelState += 1;
+                if (timer.Get() >= durationBeforeDrop[level] - durationBeforeRunning[level])
+                {
+                    Debug.Log("DROP");
+                    main.salle.volume = 1.0f;
+                }
+                else
+                    Debug.Log(timer.Get() + ", " + (durationBeforeDrop[level] - durationBeforeRunning[level]));
+                if (levelProgress > 20)
+                {
+                    timer.Reset();
+                    pauseGame = true;
+                    levelState += 1;
 
-                main.salle.Stop();
+                    main.salle.Stop();
+                }
             }
         }
         if (levelState == 4)
