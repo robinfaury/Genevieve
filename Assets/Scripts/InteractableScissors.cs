@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class InteractableSonnette : Interactable
+public class InteractableScissors : Interactable
 {
     public override void Init()
     {
@@ -20,7 +20,7 @@ public class InteractableSonnette : Interactable
             genevieve.animToPlay = 9;
             if ((new Vector2(transform.position.x, transform.position.z) - new Vector2(transform.position.x, transform.position.z)).magnitude < 0.1f)
             {
-                genevieve.gameManager.IncreaseCurrentLevelProgress(4);
+                genevieve.gameManager.IncreaseCurrentLevelProgress(2);
             }
         }
         else
