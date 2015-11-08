@@ -4,8 +4,8 @@ using System.Collections;
 public class GameManager
 {
     public int level = -1;
-    private int levelState = 0;
-    private int levelProgress = 0;
+    public int levelState = 0;
+    public int levelProgress = 0;
     public bool running = true;
     public bool pauseGame = true;
     public Timer timer;
