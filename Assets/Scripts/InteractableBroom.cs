@@ -3,36 +3,18 @@ using System.Collections;
 
 public class InteractableBroom : Interactable
 {
-    private bool isOver = false;
-    private Material originMat;
-    void Start() // Unity callback
-    {
-        originMat = GetComponent<Renderer>().material;
-    }
-    public override void Init() // Main callback
+    public override void Init()
     {
 
     }
 
-    void Update() // Unity callback
+    public override void Held(Genevieve genevieve)
     {
-        if (isOver)
-            GetComponent<Renderer>().material = Main.staticOverMat;
-        else
-            GetComponent<Renderer>().material = originMat;
-        isOver = false;
-    }
-    public override void Refresh() // Main callback
-    {
-
-    }
-
-    public override void MouseOver(Genevieve genevieve)
-    {
-        isOver = true;
-    }
-    public override void Interact(Genevieve genevieve)
-    {
-
+        transform.position = genevieve.leftHand.position;
+        transform.rotation = Quaternion.LookRotation(genevieve.rightHand.position - genevieve.leftHand.position);
+        if (Input.GetMouseButton(1) && !genevieve.moving)
+        {
+            genevieve.animToPlay = 3;
+        }
     }
 }
