@@ -47,9 +47,12 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\CameraController.cs" />
+     <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\Genevieve.cs" />
+     <Compile Include="Assets\Scripts\HeartRateMonitor.cs" />
      <Compile Include="Assets\Scripts\Interactable.cs" />
      <Compile Include="Assets\Scripts\InteractableBroom.cs" />
+     <Compile Include="Assets\Scripts\InteractableTrotter.cs" />
      <Compile Include="Assets\Scripts\Main.cs" />
      <Compile Include="Assets\Scripts\MicroMove.cs" />
      <Compile Include="Assets\Scripts\Shake.cs" />
