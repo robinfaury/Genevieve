@@ -46,20 +46,21 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\CameraController.cs" />
+     <Compile Include="Assets\Scripts\GameManager.cs" />
+     <Compile Include="Assets\Scripts\Genevieve.cs" />
+     <Compile Include="Assets\Scripts\HeartRateMonitor.cs" />
+     <Compile Include="Assets\Scripts\InterLevelPanel.cs" />
+     <Compile Include="Assets\Scripts\Interactable.cs" />
+     <Compile Include="Assets\Scripts\InteractableBroom.cs" />
+     <Compile Include="Assets\Scripts\InteractableTel.cs" />
+     <Compile Include="Assets\Scripts\InteractableTromblon.cs" />
+     <Compile Include="Assets\Scripts\InteractableTrotter.cs" />
+     <Compile Include="Assets\Scripts\Main.cs" />
+     <Compile Include="Assets\Scripts\MicroMove.cs" />
+     <Compile Include="Assets\Scripts\Shake.cs" />
+     <Compile Include="Assets\Scripts\tp.cs" />
      <Compile Include="Assets\UIManager.cs" />
-     <Compile Include="Assets\UnityVS\Scripts\CameraController.cs" />
-     <Compile Include="Assets\UnityVS\Scripts\GameManager.cs" />
-     <Compile Include="Assets\UnityVS\Scripts\Genevieve.cs" />
-     <Compile Include="Assets\UnityVS\Scripts\HeartRateMonitor.cs" />
-     <Compile Include="Assets\UnityVS\Scripts\InterLevelPanel.cs" />
-     <Compile Include="Assets\UnityVS\Scripts\Interactable.cs" />
-     <Compile Include="Assets\UnityVS\Scripts\InteractableBroom.cs" />
-     <Compile Include="Assets\UnityVS\Scripts\InteractableTromblon.cs" />
-     <Compile Include="Assets\UnityVS\Scripts\InteractableTrotter.cs" />
-     <Compile Include="Assets\UnityVS\Scripts\Main.cs" />
-     <Compile Include="Assets\UnityVS\Scripts\MicroMove.cs" />
-     <Compile Include="Assets\UnityVS\Scripts\Shake.cs" />
-     <Compile Include="Assets\UnityVS\Scripts\tp.cs" />
      <None Include="Assets\HighlightShader.shader" />
      <None Include="Assets\Standard Assets\ParticleSystems\Shaders\PriorityParticleAlpha.shader" />
      <None Include="Assets\Standard Assets\ParticleSystems\ParticleSystemsGuidelines.txt" />
@@ -78,6 +79,10 @@
  <Reference Include="UnityEditor.iOS.Extensions.Xcode">
  <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
  </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
+      <Project>{79720E8B-8B14-2C6C-0789-D602F58A5E4E}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
