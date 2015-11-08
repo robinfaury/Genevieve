@@ -9,10 +9,13 @@ public class Main : MonoBehaviour
     public static Material staticOverMatCloseEnough;
     public Genevieve genevieve;
     public CameraController cameraController;
+    public GameManager gameManager;
+    public bool pause = false;
     void Start()
     {
         staticOverMat = overMat;
         staticOverMatCloseEnough = overMatCloseEnough;
+        gameManager = new GameManager();
         if (genevieve == null)
             Debug.LogError("Genevieve not set in Main");
         else if (cameraController == null)
@@ -20,12 +23,19 @@ public class Main : MonoBehaviour
         else
         {
             genevieve.Init(cameraController);
+            genevieve.gameManager = gameManager;
             cameraController.Init(genevieve);
+            cameraController.gameManager = gameManager;
         }
     }
 
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            pause = !pause;
+            gameManager.running = !pause;
+        }
         if (genevieve != null)
         {
             genevieve.UpdatePosition();
