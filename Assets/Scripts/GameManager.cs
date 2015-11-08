@@ -56,6 +56,7 @@ public class GameManager
     private float[] durationBeforeDeath = new float[] { 100.0f, 80.0f, 70.0f, 40.0f, 30.0f, 35.0f };
     private float[] durationBeforeEnd = new float[] { 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f };
     private float[] durationInterLevel = new float[] { 2.0f, 2.0f, 2.0f, 2.0f, 2.0f, 2.0f };
+    private float[] progressNeeded = new float[] { 20, 20, 1, 5, 1, 1 };
     private void UpdateLevel(Main main)
     {
         if (levelState == 0)

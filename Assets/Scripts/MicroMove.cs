@@ -15,6 +15,7 @@ public class MicroMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        this.transform.Translate(new Vector3(Random.Range(-0.000000002f * precision, 0.000000002f * precision), Random.Range(-0.000000002f * precision, 0.000000002f * precision), Random.Range(-0.000000002f * precision, 0.000000002f * precision)));
+        this.transform.Translate(new Vector3(Random.Range(-0.000000002f * precision, 0.000000002f * precision), 0.0f, Random.Range(-0.000000002f * precision, 0.000000002f * precision)));
+        
     }
 }
