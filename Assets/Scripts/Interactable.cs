@@ -16,7 +16,7 @@ public class Interactable : MonoBehaviour
 
     public virtual bool IsCloseEnough(Genevieve genevieve)
     {
-        return (new Vector2(genevieve.transform.position.x, genevieve.transform.position.z) - new Vector2(transform.position.x, transform.position.z)).magnitude < 1.3f;
+        return (new Vector2(genevieve.transform.position.x, genevieve.transform.position.z) - new Vector2(transform.position.x, transform.position.z)).magnitude < 2.5f;
     }
     public virtual void MouseAimed(Genevieve genevieve)
     {

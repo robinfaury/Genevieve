@@ -21,7 +21,7 @@ public class InteractableTromblon : Interactable {
         transform.rotation = Quaternion.LookRotation(genevieve.rightHand.position - genevieve.leftHand.position);
         if (genevieve.gameManager.running && Input.GetMouseButton(1) && !genevieve.moving)
         {
-            genevieve.animToPlay = 3;
+            genevieve.animToPlay = 6;
             if (timer.Get() >= hitDuration)
             {
                 timer.Substract(hitDuration);
@@ -30,6 +30,10 @@ public class InteractableTromblon : Interactable {
         }
         else
         {
+            if (genevieve.moving)
+                genevieve.animToPlay = 7;
+            else
+                genevieve.animToPlay = 4;
             timer.Reset();
         }
     }

@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 0388e17cd337c2f4fba20f3e485b58ca
-timeCreated: 1446935764
+guid: e760afbf07c174f4d8f1f768ebbeb25d
+timeCreated: 1446963574
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
@@ -46,16 +46,20 @@ ModelImporter:
     400036: neck
     400038: pelvis
     4300000: Cube
-    7400000: armature|Action
-    7400002: armature|atrape
-    7400004: armature|balais
+    7400000: armature|atrape
+    7400002: armature|balais
+    7400004: armature|dead
     7400006: armature|holdgun
     7400008: armature|idle
-    7400010: armature|sit
-    7400012: armature|walk
-    7400014: armature|walk.001
-    7400016: Cube|Action
-    7400018: Cube|walk.001
+    7400010: armature|idle_balais
+    7400012: armature|sit
+    7400014: armature|Untitled
+    7400016: armature|walk
+    7400018: armature|walk.001
+    7400020: armature|walk_balais
+    7400022: armature|walk_holdgun
+    7400024: Cube|Untitled
+    7400026: Cube|walk.001
     9500000: //RootNode
     13700000: Cube
   materials:
@@ -78,72 +82,6 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     clipAnimations:
-    - serializedVersion: 16
-      name: armature|Action
-      takeName: armature|Action
-      firstFrame: 0
-      lastFrame: 1
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask:
-      - path: 
-        weight: 1
-      - path: armature
-        weight: 1
-      - path: armature/base
-        weight: 1
-      - path: armature/base/base.001
-        weight: 1
-      - path: armature/base/base.001/clavicule.L
-        weight: 1
-      - path: armature/base/base.001/clavicule.L/arm.L
-        weight: 1
-      - path: armature/base/base.001/clavicule.L/arm.L/hand.L
-        weight: 1
-      - path: armature/base/base.001/clavicule.L/arm.L/hand.L/Bone
-        weight: 1
-      - path: armature/base/base.001/clavicule.R
-        weight: 1
-      - path: armature/base/base.001/clavicule.R/arm.R
-        weight: 1
-      - path: armature/base/base.001/clavicule.R/arm.R/hand.R
-        weight: 1
-      - path: armature/base/base.001/clavicule.R/arm.R/hand.R/Bone.001
-        weight: 1
-      - path: armature/base/base.001/neck
-        weight: 1
-      - path: armature/base/base.001/neck/head
-        weight: 1
-      - path: armature/base/pelvis
-        weight: 1
-      - path: armature/base/pelvis/legL
-        weight: 1
-      - path: armature/base/pelvis/legL/foot.L
-        weight: 1
-      - path: armature/base/pelvis/legL.002
-        weight: 1
-      - path: armature/base/pelvis/legL.002/foot.R
-        weight: 1
-      - path: Cube
-        weight: 1
-      maskType: 0
-      maskSource: {instanceID: 0}
     - serializedVersion: 16
       name: armature|atrape
       takeName: armature|atrape
@@ -277,16 +215,82 @@ ModelImporter:
       maskType: 0
       maskSource: {instanceID: 0}
     - serializedVersion: 16
-      name: armature|holdgun
-      takeName: armature|holdgun
+      name: armature|dead
+      takeName: armature|dead
       firstFrame: 0
-      lastFrame: 1
+      lastFrame: 17
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
-      loopTime: 1
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: armature
+        weight: 1
+      - path: armature/base
+        weight: 1
+      - path: armature/base/base.001
+        weight: 1
+      - path: armature/base/base.001/clavicule.L
+        weight: 1
+      - path: armature/base/base.001/clavicule.L/arm.L
+        weight: 1
+      - path: armature/base/base.001/clavicule.L/arm.L/hand.L
+        weight: 1
+      - path: armature/base/base.001/clavicule.L/arm.L/hand.L/Bone
+        weight: 1
+      - path: armature/base/base.001/clavicule.R
+        weight: 1
+      - path: armature/base/base.001/clavicule.R/arm.R
+        weight: 1
+      - path: armature/base/base.001/clavicule.R/arm.R/hand.R
+        weight: 1
+      - path: armature/base/base.001/clavicule.R/arm.R/hand.R/Bone.001
+        weight: 1
+      - path: armature/base/base.001/neck
+        weight: 1
+      - path: armature/base/base.001/neck/head
+        weight: 1
+      - path: armature/base/pelvis
+        weight: 1
+      - path: armature/base/pelvis/legL
+        weight: 1
+      - path: armature/base/pelvis/legL/foot.L
+        weight: 1
+      - path: armature/base/pelvis/legL.002
+        weight: 1
+      - path: armature/base/pelvis/legL.002/foot.R
+        weight: 1
+      - path: Cube
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: armature|holdgun
+      takeName: armature|holdgun
+      firstFrame: 0
+      lastFrame: 10
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -409,6 +413,72 @@ ModelImporter:
       maskType: 0
       maskSource: {instanceID: 0}
     - serializedVersion: 16
+      name: armature|idle_balais
+      takeName: armature|idle_balais
+      firstFrame: 0
+      lastFrame: 12
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: armature
+        weight: 1
+      - path: armature/base
+        weight: 1
+      - path: armature/base/base.001
+        weight: 1
+      - path: armature/base/base.001/clavicule.L
+        weight: 1
+      - path: armature/base/base.001/clavicule.L/arm.L
+        weight: 1
+      - path: armature/base/base.001/clavicule.L/arm.L/hand.L
+        weight: 1
+      - path: armature/base/base.001/clavicule.L/arm.L/hand.L/Bone
+        weight: 1
+      - path: armature/base/base.001/clavicule.R
+        weight: 1
+      - path: armature/base/base.001/clavicule.R/arm.R
+        weight: 1
+      - path: armature/base/base.001/clavicule.R/arm.R/hand.R
+        weight: 1
+      - path: armature/base/base.001/clavicule.R/arm.R/hand.R/Bone.001
+        weight: 1
+      - path: armature/base/base.001/neck
+        weight: 1
+      - path: armature/base/base.001/neck/head
+        weight: 1
+      - path: armature/base/pelvis
+        weight: 1
+      - path: armature/base/pelvis/legL
+        weight: 1
+      - path: armature/base/pelvis/legL/foot.L
+        weight: 1
+      - path: armature/base/pelvis/legL.002
+        weight: 1
+      - path: armature/base/pelvis/legL.002/foot.R
+        weight: 1
+      - path: Cube
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
       name: armature|sit
       takeName: armature|sit
       firstFrame: 0
@@ -419,6 +489,72 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: armature
+        weight: 1
+      - path: armature/base
+        weight: 1
+      - path: armature/base/base.001
+        weight: 1
+      - path: armature/base/base.001/clavicule.L
+        weight: 1
+      - path: armature/base/base.001/clavicule.L/arm.L
+        weight: 1
+      - path: armature/base/base.001/clavicule.L/arm.L/hand.L
+        weight: 1
+      - path: armature/base/base.001/clavicule.L/arm.L/hand.L/Bone
+        weight: 1
+      - path: armature/base/base.001/clavicule.R
+        weight: 1
+      - path: armature/base/base.001/clavicule.R/arm.R
+        weight: 1
+      - path: armature/base/base.001/clavicule.R/arm.R/hand.R
+        weight: 1
+      - path: armature/base/base.001/clavicule.R/arm.R/hand.R/Bone.001
+        weight: 1
+      - path: armature/base/base.001/neck
+        weight: 1
+      - path: armature/base/base.001/neck/head
+        weight: 1
+      - path: armature/base/pelvis
+        weight: 1
+      - path: armature/base/pelvis/legL
+        weight: 1
+      - path: armature/base/pelvis/legL/foot.L
+        weight: 1
+      - path: armature/base/pelvis/legL.002
+        weight: 1
+      - path: armature/base/pelvis/legL.002/foot.R
+        weight: 1
+      - path: Cube
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: armature|Untitled
+      takeName: armature|Untitled
+      firstFrame: 0
+      lastFrame: 1
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -607,8 +743,140 @@ ModelImporter:
       maskType: 0
       maskSource: {instanceID: 0}
     - serializedVersion: 16
-      name: Cube|Action
-      takeName: Cube|Action
+      name: armature|walk_balais
+      takeName: armature|walk_balais
+      firstFrame: 0
+      lastFrame: 16
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: armature
+        weight: 1
+      - path: armature/base
+        weight: 1
+      - path: armature/base/base.001
+        weight: 1
+      - path: armature/base/base.001/clavicule.L
+        weight: 1
+      - path: armature/base/base.001/clavicule.L/arm.L
+        weight: 1
+      - path: armature/base/base.001/clavicule.L/arm.L/hand.L
+        weight: 1
+      - path: armature/base/base.001/clavicule.L/arm.L/hand.L/Bone
+        weight: 1
+      - path: armature/base/base.001/clavicule.R
+        weight: 1
+      - path: armature/base/base.001/clavicule.R/arm.R
+        weight: 1
+      - path: armature/base/base.001/clavicule.R/arm.R/hand.R
+        weight: 1
+      - path: armature/base/base.001/clavicule.R/arm.R/hand.R/Bone.001
+        weight: 1
+      - path: armature/base/base.001/neck
+        weight: 1
+      - path: armature/base/base.001/neck/head
+        weight: 1
+      - path: armature/base/pelvis
+        weight: 1
+      - path: armature/base/pelvis/legL
+        weight: 1
+      - path: armature/base/pelvis/legL/foot.L
+        weight: 1
+      - path: armature/base/pelvis/legL.002
+        weight: 1
+      - path: armature/base/pelvis/legL.002/foot.R
+        weight: 1
+      - path: Cube
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: armature|walk_holdgun
+      takeName: armature|walk_holdgun
+      firstFrame: 0
+      lastFrame: 16
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: armature
+        weight: 1
+      - path: armature/base
+        weight: 1
+      - path: armature/base/base.001
+        weight: 1
+      - path: armature/base/base.001/clavicule.L
+        weight: 1
+      - path: armature/base/base.001/clavicule.L/arm.L
+        weight: 1
+      - path: armature/base/base.001/clavicule.L/arm.L/hand.L
+        weight: 1
+      - path: armature/base/base.001/clavicule.L/arm.L/hand.L/Bone
+        weight: 1
+      - path: armature/base/base.001/clavicule.R
+        weight: 1
+      - path: armature/base/base.001/clavicule.R/arm.R
+        weight: 1
+      - path: armature/base/base.001/clavicule.R/arm.R/hand.R
+        weight: 1
+      - path: armature/base/base.001/clavicule.R/arm.R/hand.R/Bone.001
+        weight: 1
+      - path: armature/base/base.001/neck
+        weight: 1
+      - path: armature/base/base.001/neck/head
+        weight: 1
+      - path: armature/base/pelvis
+        weight: 1
+      - path: armature/base/pelvis/legL
+        weight: 1
+      - path: armature/base/pelvis/legL/foot.L
+        weight: 1
+      - path: armature/base/pelvis/legL.002
+        weight: 1
+      - path: armature/base/pelvis/legL.002/foot.R
+        weight: 1
+      - path: Cube
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Cube|Untitled
+      takeName: Cube|Untitled
       firstFrame: 0
       lastFrame: 1
       wrapMode: 0

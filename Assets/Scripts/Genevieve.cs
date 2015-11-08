@@ -13,13 +13,15 @@ public class Genevieve : MonoBehaviour
     public float speed = 2.0f;
     [HideInInspector]
     public bool moving = false;
+    [HideInInspector]
+    public bool sat = true;
     private float gravity = 5.0f;
     private Vector2 facingDirection = new Vector2(0, 1);
     private Vector2 wantedFacingDirection = new Vector2(0, 1);
     private Interactable interactableAimed = null;
     private Interactable interactableHeld = null;
     private Animator animator;
-    private string[] anims = new string[] { "armature|idle", "armature|walk", "armature|sit", "armature|balais" };
+    private string[] anims = new string[] { "armature|idle", "armature|walk", "armature|sit", "armature|balais", "armature|idle_balais", "armature|walk_balais", "armature|holdgun", "armature|walk_holdgun", "armature|dead", "armature|atrape" };
     private int lastAnim = -1;
     [HideInInspector]
     public int animToPlay;
@@ -27,6 +29,7 @@ public class Genevieve : MonoBehaviour
     public Transform leftHand;
     [HideInInspector]
     public Transform rightHand;
+    private Timer grabTimer = null;
     public void Init(CameraController cameraController)
     {
         this.cameraController = cameraController;
@@ -105,6 +108,8 @@ public class Genevieve : MonoBehaviour
                 {
                     interactableHeld = interactable;
                     interactableHeld.Take(this);
+                    grabTimer = new Timer();
+                    grabTimer.Reset();
                 }
             }
             interactableAimed = interactable;
@@ -112,6 +117,15 @@ public class Genevieve : MonoBehaviour
     }
     public void UpdateAnims()
     {
+        if (sat)
+            animToPlay = 2;
+        else if (grabTimer != null)
+        {
+            if (grabTimer.Get() < 0.5f)
+                animToPlay = 9;
+            else
+                grabTimer = null;
+        }
         if (animToPlay != lastAnim)
             animator.CrossFade(anims[animToPlay], 0.2f, 0, 0f);
         lastAnim = animToPlay;
