@@ -7,6 +7,7 @@ public class Interactable : MonoBehaviour
     void Start()
     {
         originMat = GetComponent<Renderer>().material;
+        Init();
     }
     public virtual void Init()
     {

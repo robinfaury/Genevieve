@@ -9,13 +9,16 @@ public class Main : MonoBehaviour
     public static Material staticOverMatCloseEnough;
     public Genevieve genevieve;
     public CameraController cameraController;
+    [HideInInspector]
     public GameManager gameManager;
-    public bool pause = false;
+    [HideInInspector]
+    public bool pauseMenu = false;
     void Start()
     {
         staticOverMat = overMat;
         staticOverMatCloseEnough = overMatCloseEnough;
         gameManager = new GameManager();
+        gameManager.Init();
         if (genevieve == null)
             Debug.LogError("Genevieve not set in Main");
         else if (cameraController == null)
@@ -31,11 +34,14 @@ public class Main : MonoBehaviour
 
     void Update()
     {
+        gameManager.Update(this);
         if(Input.GetKeyDown(KeyCode.Escape))
-        {
-            pause = !pause;
-            gameManager.running = !pause;
-        }
+            pauseMenu = !pauseMenu;
+        if (pauseMenu)
+            Time.timeScale = 0;
+        else
+            Time.timeScale = 1;
+        gameManager.running = !gameManager.pauseGame && !pauseMenu;
         if (genevieve != null)
         {
             genevieve.UpdatePosition();
@@ -43,5 +49,32 @@ public class Main : MonoBehaviour
             genevieve.UpdateAfterCamera();
             genevieve.UpdateAnims();
         }
+    }
+}
+
+
+
+public class Timer
+{
+    private float t = Time.time;
+    public Timer()
+    {
+        t = Time.time;
+    }
+    public void Reset()
+    {
+        t = Time.time;
+    }
+    public float Get()
+    {
+        return Time.time - t;
+    }
+    public void Set(float newT)
+    {
+        t = Time.time - newT;
+    }
+    public void Substract(float sec)
+    {
+        t += sec;
     }
 }
