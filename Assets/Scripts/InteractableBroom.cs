@@ -19,13 +19,13 @@ public class InteractableBroom : Interactable
     {
         transform.position = genevieve.leftHand.position;
         transform.rotation = Quaternion.LookRotation(genevieve.rightHand.position - genevieve.leftHand.position);
-        if (Input.GetMouseButton(1) && !genevieve.moving)
+        if (genevieve.gameManager.running && Input.GetMouseButton(1) && !genevieve.moving)
         {
             genevieve.animToPlay = 3;
             if(timer.Get() >= hitDuration)
             {
                 timer.Substract(hitDuration);
-                genevieve.gameManager.IncreaseCurrentLevelProgress();
+                genevieve.gameManager.IncreaseCurrentLevelProgress(0);
             }
         }
         else

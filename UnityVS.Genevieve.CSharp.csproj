@@ -74,6 +74,7 @@
     <Compile Include="Assets\Scripts\Interactable.cs" />
     <Compile Include="Assets\Scripts\InteractableBroom.cs" />
     <Compile Include="Assets\Scripts\InteractableTrotter.cs" />
+    <Compile Include="Assets\Scripts\InterLevelPanel.cs" />
     <Compile Include="Assets\Scripts\Main.cs" />
     <Compile Include="Assets\Scripts\MicroMove.cs" />
     <Compile Include="Assets\Scripts\Shake.cs" />

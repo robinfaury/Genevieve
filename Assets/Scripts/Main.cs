@@ -7,7 +7,13 @@ public class Main : MonoBehaviour
     public static Material staticOverMat;
     public Material overMatCloseEnough;
     public static Material staticOverMatCloseEnough;
-    public Genevieve genevieve;
+    public GameObject interLevelPanelGameObject;
+    public GameObject cursorGameObject;
+    public GameObject map;
+    public GameObject mapPrefab;
+    [HideInInspector]
+    public InterLevelPanel interLevelPanel;
+    private Genevieve genevieve2 = null;
     public CameraController cameraController;
     [HideInInspector]
     public GameManager gameManager;
@@ -19,17 +25,10 @@ public class Main : MonoBehaviour
         staticOverMatCloseEnough = overMatCloseEnough;
         gameManager = new GameManager();
         gameManager.Init();
-        if (genevieve == null)
-            Debug.LogError("Genevieve not set in Main");
-        else if (cameraController == null)
-            Debug.LogError("Camera not set in Main");
-        else
-        {
-            genevieve.Init(cameraController);
-            genevieve.gameManager = gameManager;
-            cameraController.Init(genevieve);
-            cameraController.gameManager = gameManager;
-        }
+        interLevelPanel = new InterLevelPanel();
+        interLevelPanel.Init(interLevelPanelGameObject);
+
+        ResetMap();
     }
 
     void Update()
@@ -42,13 +41,35 @@ public class Main : MonoBehaviour
         else
             Time.timeScale = 1;
         gameManager.running = !gameManager.pauseGame && !pauseMenu;
-        if (genevieve != null)
+        cursorGameObject.SetActive(gameManager.running);
+        if (genevieve2 != null)
         {
-            genevieve.UpdatePosition();
+            genevieve2.UpdatePosition();
             cameraController.UpdateCamera();
-            genevieve.UpdateAfterCamera();
-            genevieve.UpdateAnims();
+            genevieve2.UpdateAfterCamera();
+            genevieve2.UpdateAnims();
         }
+        interLevelPanel.Update();
+    }
+
+    public void ResetMap()
+    {
+        if (map != null)
+        {
+            Vector3 mapPos = map.transform.position;
+            Quaternion mapRot = map.transform.rotation;
+            GameObject.Destroy(map);
+            map = GameObject.Instantiate(mapPrefab);
+            map.transform.position = mapPos;
+            map.transform.rotation = mapRot;
+        }
+        else
+            map = GameObject.Instantiate(mapPrefab);
+        genevieve2 = map.transform.Find("Genevieve").GetComponent<Genevieve>();
+        genevieve2.Init(cameraController);
+        genevieve2.gameManager = gameManager;
+        cameraController.Init(genevieve2);
+        cameraController.gameManager = gameManager;
     }
 }
 
