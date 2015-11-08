@@ -66,7 +66,7 @@ public class Main : MonoBehaviour
         }
         gameManager.Update(this);
 
-        if (gameManager.level != 5)
+        if (gameManager.level != 4)
             porteLargeRigidBody.constraints = RigidbodyConstraints.FreezeAll;
         else
             porteLargeRigidBody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;

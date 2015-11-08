@@ -18,7 +18,7 @@ public class InteractableScissors : Interactable
         if (genevieve.gameManager.running && Input.GetMouseButton(1) && !genevieve.moving)
         {
             genevieve.animToPlay = 9;
-            if ((new Vector2(transform.position.x, transform.position.z) - new Vector2(transform.position.x, transform.position.z)).magnitude < 0.1f)
+            if ((new Vector2(transform.position.x, transform.position.z) - new Vector2(2.7f, 5.2f)).magnitude < 1.0f)
             {
                 genevieve.gameManager.IncreaseCurrentLevelProgress(2);
             }
@@ -30,5 +30,11 @@ public class InteractableScissors : Interactable
             else
                 genevieve.animToPlay = 0;
         }
+    }
+
+    void Update()
+    {
+        if (this.transform.position.y < 0.0f)
+            this.transform.position = new Vector3(this.transform.position.x, 0.1f, this.transform.position.z);
     }
 }
