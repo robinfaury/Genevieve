@@ -18,7 +18,7 @@ public class GameManager
     {
         if (forLevel == level)
         {
-            Debug.Log(level + ", " + levelState + ", " + levelProgress);
+            Debug.Log("Increase " + level + ", " + levelState + ", " + levelProgress);
             levelProgress += 1;
         }
     }

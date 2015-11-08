@@ -21,7 +21,7 @@ public class Genevieve : MonoBehaviour
     private Interactable interactableAimed = null;
     private Interactable interactableHeld = null;
     private Animator animator;
-    private string[] anims = new string[] { "armature|idle", "armature|walk", "armature|sit", "armature|balais" };
+    private string[] anims = new string[] { "armature|idle", "armature|walk", "armature|sit", "armature|balais", "armature|idle_balais", "armature|walk_balais", "armature|holdgun", "armature|walk_holdgun", "armature|dead", "armature|atrape" };
     private int lastAnim = -1;
     [HideInInspector]
     public int animToPlay;

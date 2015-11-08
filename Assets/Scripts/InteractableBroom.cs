@@ -30,6 +30,10 @@ public class InteractableBroom : Interactable
         }
         else
         {
+            if (genevieve.moving)
+                genevieve.animToPlay = 5;
+            else
+                genevieve.animToPlay = 4;
             timer.Reset();
         }
     }
