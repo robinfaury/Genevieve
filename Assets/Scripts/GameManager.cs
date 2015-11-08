@@ -73,7 +73,7 @@ public class GameManager
     private float[] durationBeforeSalleSound = new float[] { 5.0f, 5.0f, 5.0f, 5.0f, 5.0f, 5.0f };
     private float[] durationBeforeRunning = new float[] { 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f };
     private float[] durationBeforeDrop = new float[] { 88.0f, 61.0f, 46.0f, 18.0f, 15.0f, 23.0f };
-    private float[] durationBeforeDeath = new float[] { 100.0f, 80.0f, 70.0f, 40.0f, 30.0f, 35.0f };
+    private float[] durationBeforeDeath = new float[] { 100.0f, 80.0f, 70.0f, 140.0f, 130.0f, 135.0f };
     private float[] durationBeforeEnd = new float[] { 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f };
     private float[] durationInterLevel = new float[] { 2.0f, 2.0f, 2.0f, 2.0f, 2.0f, 2.0f };
     private float[] progressNeeded = new float[] { 20, 20, 1, 5, 1, 1 };
@@ -98,7 +98,7 @@ public class GameManager
                 levelState += 1;
 
                 main.salle.clip = main.audioClips[level * 2 + 1];
-                main.salle.volume = 0.5f;
+                main.salle.volume = 0.2f;
                 main.salle.Play();
 
                 main.genevieve.sat = false;
@@ -130,7 +130,7 @@ public class GameManager
                 }
                 else
                     Debug.Log(timer.Get() + ", " + (durationBeforeDrop[level] - durationBeforeRunning[level]));
-                if (levelProgress > progressNeeded[level])
+                if (levelProgress >= progressNeeded[level])
                 {
                     timer.Reset();
                     pauseGame = true;

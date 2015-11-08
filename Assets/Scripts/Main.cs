@@ -49,6 +49,11 @@ public class Main : MonoBehaviour
             else
                 uiManager.Hide();
         }
+        /*if (Input.GetKeyDown(KeyCode.G))
+        {
+            gameManager.level += 1;
+            //gameManager.IncreaseCurrentLevelProgress(gameManager.level);
+        }*/
         if (uiManager.playClicked)
             pauseMenu = false;
         uiManager.playClicked = false;
