@@ -130,7 +130,7 @@ public class GameManager
                 }
                 else
                     Debug.Log(timer.Get() + ", " + (durationBeforeDrop[level] - durationBeforeRunning[level]));
-                if (levelProgress > 20)
+                if (levelProgress > progressNeeded[level])
                 {
                     timer.Reset();
                     pauseGame = true;
