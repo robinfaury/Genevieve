@@ -39,7 +39,6 @@ public class Main : MonoBehaviour
 
     void Update()
     {
-
         if(Input.GetKeyDown(KeyCode.Escape))
         {
             pauseMenu = !pauseMenu;
