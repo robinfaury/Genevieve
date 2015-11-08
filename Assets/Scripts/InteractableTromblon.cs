@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class InteractableTromblon : Interactable {
-
+public class InteractableTromblon : Interactable
+{
     private Timer timer;
     private const float hitDuration = 0.333f;
     public override void Init()

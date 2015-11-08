@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class InteractableTel : Interactable
+public class InteractableSonnette : Interactable
 {
     private Timer timer;
     private const float hitDuration = 0.333f;
