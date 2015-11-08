@@ -7,6 +7,7 @@ public class Interactable : MonoBehaviour
     void Start()
     {
         originMat = GetComponent<Renderer>().material;
+        Init();
     }
     public virtual void Init()
     {
@@ -15,7 +16,7 @@ public class Interactable : MonoBehaviour
 
     public virtual bool IsCloseEnough(Genevieve genevieve)
     {
-        return (genevieve.transform.position - transform.position).magnitude < 1.3f;
+        return (new Vector2(genevieve.transform.position.x, genevieve.transform.position.z) - new Vector2(transform.position.x, transform.position.z)).magnitude < 1.3f;
     }
     public virtual void MouseAimed(Genevieve genevieve)
     {
