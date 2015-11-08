@@ -33,6 +33,26 @@ public class GameManager
     }
     public void Update(Main main)
     {
+        if (level == -3)
+        {
+            pauseGame = true;
+            main.genevieve.animToPlay = 8;
+            timer.Reset();
+            levelState = 0;
+        }
+        if (level == -2)
+        {
+            if (levelState == 0)
+            {
+                if (timer.Get() > 3.0f)
+                {
+                    pauseGame = true;
+                    main.interLevelPanel.FadeIn("You died", 1);
+                    main.genevieve.animToPlay = 8;
+                    levelState += 1;
+                }
+            }
+        }
         if (level == -1)
         {
             pauseGame = true;
@@ -110,7 +130,7 @@ public class GameManager
                 }
                 else
                     Debug.Log(timer.Get() + ", " + (durationBeforeDrop[level] - durationBeforeRunning[level]));
-                if (levelProgress > 20)
+                if (levelProgress > progressNeeded[level])
                 {
                     timer.Reset();
                     pauseGame = true;
