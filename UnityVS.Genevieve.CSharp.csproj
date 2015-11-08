@@ -60,12 +60,6 @@
     <Reference Include="UnityEngine.Analytics">
       <HintPath>Library\UnityAssemblies\UnityEngine.Analytics.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.Networking">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEditor.iOS.Extensions.Xcode">
       <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
     </Reference>
@@ -75,10 +69,11 @@
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\Genevieve.cs" />
     <Compile Include="Assets\Scripts\HeartRateMonitor.cs" />
+    <Compile Include="Assets\Scripts\InterLevelPanel.cs" />
     <Compile Include="Assets\Scripts\Interactable.cs" />
     <Compile Include="Assets\Scripts\InteractableBroom.cs" />
+    <Compile Include="Assets\Scripts\InteractableTromblon.cs" />
     <Compile Include="Assets\Scripts\InteractableTrotter.cs" />
-    <Compile Include="Assets\Scripts\InterLevelPanel.cs" />
     <Compile Include="Assets\Scripts\Main.cs" />
     <Compile Include="Assets\Scripts\MicroMove.cs" />
     <Compile Include="Assets\Scripts\Shake.cs" />

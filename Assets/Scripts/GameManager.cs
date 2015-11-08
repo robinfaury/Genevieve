@@ -18,104 +18,113 @@ public class GameManager
     {
         if (forLevel == level)
         {
-            Debug.Log(level + ", " + levelState + ", " + levelProgress);
+            Debug.Log("Increase " + level + ", " + levelState + ", " + levelProgress);
             levelProgress += 1;
         }
     }
     private void NextLevel(Main main)
     {
         level += 1;
-        levelProgress = 0;
         levelState = 0;
+        levelProgress = 0;
         Debug.Log("Level " + level);
         main.interLevelPanel.FadeOut("Part " + (level + 1), 1);
         main.ResetMap();
     }
     public void Update(Main main)
     {
-        if(level == -1)
+        if (level == -1)
         {
             pauseGame = true;
             main.interLevelPanel.Set("Part " + (level + 2), 1);
             if (timer.Get() >= 2.0f)
                 NextLevel(main);
         }
-        if (level == 0)
+        if (level >= 0 && level <= 5)
         {
-            if (levelState == 0)
+            UpdateLevel(main);
+        }
+        if (level == 6)
+        {
+            pauseGame = true;
+            main.interLevelPanel.Set("Win!", 1);
+        }
+    }
+    private float[] durationBeforeSalleSound = new float[] { 5.0f, 5.0f, 5.0f, 5.0f, 5.0f, 5.0f };
+    private float[] durationBeforeRunning = new float[] { 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f };
+    private float[] durationBeforeDrop = new float[] { 88.0f, 61.0f, 46.0f, 18.0f, 15.0f, 23.0f };
+    private float[] durationBeforeEnd = new float[] { 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f };
+    private float[] durationInterLevel = new float[] { 2.0f, 2.0f, 2.0f, 2.0f, 2.0f, 2.0f };
+    private void UpdateLevel(Main main)
+    {
+        if (levelState == 0)
+        {
+            timer.Reset();
+            pauseGame = true;
+            levelState += 1;
+
+            main.mamySource.clip = main.audioClips[level * 2];
+            main.mamySource.volume = 0.2f;
+            main.mamySource.Play();
+        }
+        if (levelState == 1)
+        {
+            if (timer.Get() >= durationBeforeSalleSound[level])
             {
-                if (timer.Get() >= 5.0f)
-                {
-                    timer.Reset();
-                    pauseGame = false;
-                    levelState = 1;
-                }
-            }
-            if (levelState == 1)
-            {
-                if (levelProgress > 20)
-                {
-                    timer.Reset();
-                    pauseGame = true;
-                    levelState = 2;
-                }
-            }
-            if (levelState == 2)
-            {
-                if (timer.Get() >= 1.0f)
-                {
-                    timer.Reset();
-                    pauseGame = true;
-                    main.interLevelPanel.FadeIn("Part " + (level + 2), 1);
-                    levelState = 3;
-                }
-            }
-            if (levelState == 3)
-            {
-                if (timer.Get() >= 2.0f)
-                {
-                    timer.Reset();
-                    NextLevel(main);
-                }
+                timer.Reset();
+                pauseGame = true;
+                levelState += 1;
+
+                main.salle.clip = main.audioClips[level * 2 + 1];
+                main.salle.volume = 0.5f;
+                main.salle.Play();
+
+                main.genevieve.sat = false;
             }
         }
-        if (level == 1)
+        if (levelState == 2)
         {
-            if (levelState == 0)
+            if (timer.Get() >= durationBeforeRunning[level])
             {
-                if (timer.Get() >= 5.0f)
-                {
-                    timer.Reset();
-                    pauseGame = false;
-                    levelState = 1;
-                }
+                timer.Reset();
+                pauseGame = false;
+                levelState += 1;
             }
-            if (levelState == 1)
+        }
+        if (levelState == 3)
+        {
+            if (timer.Get() >= durationBeforeDrop[level] - durationBeforeRunning[level])
             {
-                if (levelProgress > 20)
-                {
-                    timer.Reset();
-                    pauseGame = true;
-                    levelState = 2;
-                }
+                Debug.Log("DROP");
+                main.salle.volume = 1.0f;
             }
-            if (levelState == 2)
+            else
+                Debug.Log(timer.Get() + ", " + (durationBeforeDrop[level] - durationBeforeRunning[level]));
+            if (levelProgress > 20)
             {
-                if (timer.Get() >= 1.0f)
-                {
-                    timer.Reset();
-                    pauseGame = true;
-                    main.interLevelPanel.FadeIn("Part " + (level + 2), 1);
-                    levelState = 3;
-                }
+                timer.Reset();
+                pauseGame = true;
+                levelState += 1;
+
+                main.salle.Stop();
             }
-            if (levelState == 3)
+        }
+        if (levelState == 4)
+        {
+            if (timer.Get() >= durationBeforeEnd[level])
             {
-                if (timer.Get() >= 2.0f)
-                {
-                    timer.Reset();
-                    //NextLevel(main);
-                }
+                timer.Reset();
+                pauseGame = true;
+                main.interLevelPanel.FadeIn("Part " + (level + 2), 1);
+                levelState += 1;
+            }
+        }
+        if (levelState == 5)
+        {
+            if (timer.Get() >= durationInterLevel[level])
+            {
+                timer.Reset();
+                NextLevel(main);
             }
         }
     }
